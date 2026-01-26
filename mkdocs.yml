@@ -1,0 +1,44 @@
+site_name: Slicks Telemetry
+site_url: https://western-formula-racing.github.io/wfr-telemetry/
+repo_url: https://github.com/Western-Formula-Racing/wfr-telemetry
+repo_name: Western-Formula-Racing/wfr-telemetry
+
+theme:
+  name: material
+  palette: 
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+    - content.action.edit
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Home: index.md
+  - Getting Started: getting_started.md
+  - Analysis Example: example_analysis.md
+  - API Reference: api_reference.md
+  - Advanced Usage: advanced_usage.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
