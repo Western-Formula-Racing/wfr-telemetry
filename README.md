@@ -1,6 +1,6 @@
 # Slicks
 
-The official Python data pipeline for **Western Formula Racing**.
+The home baked data pipeline for **Western Formula Racing**.
 
 This package handles:
 1. **Data Ingestion:** Reliable fetching from InfluxDB 3.0.
@@ -9,14 +9,17 @@ This package handles:
 
 ## Documentation
 
+- **[Full Documentation](https://western-formula-racing.github.io/wfr-telemetry/)**
 - **[Getting Started](docs/getting_started.md):** Installation and your first script.
 - **[API Reference](docs/api_reference.md):** Detailed function documentation.
 - **[Advanced Usage](docs/advanced_usage.md):** Configuration, Discovery, and Bulk Exports.
 
 ## Installation
 
+Now available on PyPI!
+
 ```bash
-pip install git+https://github.com/Western-Formula-Racing/wfr-telemetry.git
+pip install slicks
 ```
 
 ## Quick Example

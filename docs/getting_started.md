@@ -1,6 +1,6 @@
-# Getting Started with Slicks
+# Getting Started with Slicks Telemetry
 
-Welcome to the **Slicks** telemetry package. This guide will help you install the package and write your first script to analyze race data.
+Welcome to the **Slicks Telemetry** package. This guide will help you install the package and write your first script to analyze race data.
 
 ## 1. Installation
 

@@ -9,7 +9,7 @@ def main():
     # ---------------------------------------------------------
     # 1. Configuration & Connection
     # ---------------------------------------------------------
-    print("Connecting to WFR Telemetry Database...")
+    print("Connecting to Slicks Telemetry Database...")
 
     # ---------------------------------------------------------
     # 2. Discover Sensors (Optional but good practice)

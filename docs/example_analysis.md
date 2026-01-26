@@ -22,7 +22,7 @@ print("Connecting to Slicks Telemetry Database...")
 
 **Output:**
 ```text
-Connecting to WFR Telemetry Database...
+Connecting to Slicks Telemetry Database...
 ```
 
 ---

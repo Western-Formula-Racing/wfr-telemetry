@@ -1,4 +1,4 @@
-# WFR Telemetry
+# Slicks
 
 The home baked data pipeline for **Western Formula Racing**.
 

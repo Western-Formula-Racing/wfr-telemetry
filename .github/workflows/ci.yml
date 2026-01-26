@@ -1,4 +1,4 @@
-name: WFR Telemetry Pipeline CI
+name: Slicks Telemetry Pipeline CI
 
 on:
   push:
