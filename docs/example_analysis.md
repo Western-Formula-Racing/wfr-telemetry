@@ -11,7 +11,7 @@ This guide walks through a complete analysis session, from connecting to the dat
 First, we import the necessary libraries and configure our connection.
 
 ```python
-import slicks as wfr
+import slicks
 import matplotlib.pyplot as plt
 from datetime import datetime
 import pandas as pd
@@ -36,7 +36,7 @@ start_time = datetime(2025, 9, 28, 20, 20, 0)
 end_time   = datetime(2025, 9, 28, 21, 0, 0)
 
 print(f"Scanning for sensors between {start_time} and {end_time}...")
-available_sensors = wfr.discover_sensors(start_time, end_time)
+available_sensors = slicks.discover_sensors(start_time, end_time)
 
 # Filter for Inverter (INV) related sensors to narrow our search
 inv_sensors = [s for s in available_sensors if s.startswith("INV_")]
@@ -64,7 +64,7 @@ print(f"Fetching data for: {target_signals}...")
 
 # Fetch 1-second resampled data. 
 # We disable filter_movement to capture the full session including startup.
-df = wfr.fetch_telemetry(start_time, end_time, signals=target_signals, filter_movement=False)
+df = slicks.fetch_telemetry(start_time, end_time, signals=target_signals, filter_movement=False)
 
 if df is not None:
     print(f"Successfully loaded {len(df)} data points.")

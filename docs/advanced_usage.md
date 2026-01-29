@@ -30,9 +30,9 @@ export INFLUX_DB="Season2026_Final"
 
 ### Option B: Runtime Configuration (Best for Scripts/Notebooks)
 ```python
-import slicks as wfr
+import slicks
 
-wfr.configure(
+slicks.connect_influxdb3(
     url="http://192.168.1.50:9000",
     db="DynoTest_Day1"
 )
@@ -53,7 +53,7 @@ If you are analyzing **Charging** or **Static Testing**, the default movement fi
 
 ```python
 # Fetch Battery Current even when car is stopped
-df = wfr.fetch_telemetry(
+df = slicks.fetch_telemetry(
     start, end, 
     signals="PackCurrent", 
     filter_movement=False
