@@ -2,7 +2,7 @@ import unittest
 import sys
 import os
 
-# Ensure src is in path so we can import wfr_telemetry
+# Ensure src is in path so we can import slicks
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
 import slicks

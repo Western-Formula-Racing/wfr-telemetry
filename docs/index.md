@@ -25,11 +25,11 @@ pip install git+https://github.com/Western-Formula-Racing/wfr-telemetry.git
 ## Quick Example
 
 ```python
-import wfr_telemetry as wfr
+import slicks as wfr
 from datetime import datetime
 
 # 1. Connect (Auto-configured or custom)
-wfr.configure(db="WFR25")
+wfr.configure(db="WFR25", influx_url="http://influxdb:9000", influx_token="apiv3_your_token")
 
 # 2. Fetch Data (One-liner)
 df = wfr.fetch_telemetry(

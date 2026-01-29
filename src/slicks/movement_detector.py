@@ -155,6 +155,6 @@ if __name__ == "__main__":
             print(f"\nTotal Valid Movement Time: {total_moving_time}")
             
     except FileNotFoundError:
-        print(f"File {file_path} not found. Usage: python -m wfr_telemetry.movement_detector <csv_file>")
+        print(f"File {file_path} not found. Usage: python -m slicks.movement_detector <csv_file>")
     except Exception as e:
         print(f"Error: {e}")
