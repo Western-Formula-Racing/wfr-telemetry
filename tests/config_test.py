@@ -18,7 +18,7 @@ class TestConfiguration(unittest.TestCase):
 
     def tearDown(self):
         # Restore original values
-        slicks.configure(
+        slicks.connect_influxdb3(
             url=self.orig_url,
             token=self.orig_token,
             org=self.orig_org,
@@ -31,7 +31,7 @@ class TestConfiguration(unittest.TestCase):
         new_org = "TestOrg"
         new_db = "TestDB"
 
-        slicks.configure(
+        slicks.connect_influxdb3(
             url=new_url,
             token=new_token,
             org=new_org,
@@ -45,7 +45,7 @@ class TestConfiguration(unittest.TestCase):
 
     def test_partial_update(self):
         new_db = "PartialDB"
-        slicks.configure(db=new_db)
+        slicks.connect_influxdb3(db=new_db)
 
         self.assertEqual(config.INFLUX_DB, new_db)
         # Others should remain unchanged

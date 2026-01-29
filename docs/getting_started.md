@@ -8,7 +8,7 @@ Welcome to the **Slicks Telemetry** package. This guide will help you install th
 To install the latest stable version directly from GitHub:
 
 ```bash
-pip install git+https://github.com/Western-Formula-Racing/wfr-telemetry.git
+pip install slicks
 ```
 
 ### For Developers (Contributing)
@@ -30,11 +30,11 @@ Here is the minimal code needed to connect to the database and download data for
 The package connects to the InfluxDB database automatically using defaults, but you can configure it explicitly.
 
 ```python
-import slicks as wfr
+import slicks
 from datetime import datetime
 
 # Optional: Configure manually (or use .env file / defaults)
-wfr.configure(
+slicks.connect_influxdb3(
     url="http://your-influx-server:8086",
     token="your-token-here", # Ask Data Lead for your token
     org="Docs",
@@ -55,7 +55,7 @@ You can request a single sensor or a list of sensors.
 
 ```python
 # Fetch Motor Speed
-df = wfr.fetch_telemetry(start, end, "INV_Motor_Speed")
+df = slicks.fetch_telemetry(start, end, "INV_Motor_Speed")
 
 if df is not None:
     print(df.head())
@@ -74,8 +74,24 @@ By default, `fetch_telemetry` filters out data when the car is stationary (idlin
 To see raw data (including pit/idle time), pass `filter_movement=False`:
 
 ```python
-df_raw = wfr.fetch_telemetry(start, end, "INV_Motor_Speed", filter_movement=False)
+df_raw = slicks.fetch_telemetry(start, end, "INV_Motor_Speed", filter_movement=False)
 ```
 
 ### Auto-Resampling
-Data is automatically aligned to a **1-second frequency** (`1s`). This makes it easy to plot multiple sensors on the same graph without worrying about mismatched timestamps.
+By default, data is aligned to a **1-second frequency** (`1s`). This makes it easy to plot multiple sensors on the same graph without worrying about mismatched timestamps.
+
+To get **raw data without resampling**, pass `resample=None`:
+
+```python
+df_raw = slicks.fetch_telemetry(start, end, "INV_Motor_Speed", resample=None)
+```
+
+You can also specify a **custom frequency** using any pandas frequency string:
+
+```python
+# High-resolution data (100ms)
+df_fast = slicks.fetch_telemetry(start, end, "INV_Motor_Speed", resample="100ms")
+
+# Lower resolution (5 seconds)
+df_slow = slicks.fetch_telemetry(start, end, "INV_Motor_Speed", resample="5s")
+```

@@ -11,7 +11,7 @@ INFLUX_TOKEN = os.getenv("INFLUX_TOKEN", "my-token")
 INFLUX_ORG = os.getenv("INFLUX_ORG", "Docs") 
 INFLUX_DB = os.getenv("INFLUX_DB", "WFR25")
 
-def configure(url=None, token=None, org=None, db=None):
+def connect_influxdb3(url=None, token=None, org=None, db=None):
     """
     Update the global configuration settings for InfluxDB connection.
     """

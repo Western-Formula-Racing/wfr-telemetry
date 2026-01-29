@@ -4,12 +4,12 @@ This document details the functions available in the `slicks` package.
 
 ## Core Functions
 
-### `slicks.configure`
+### `slicks.connect_influxdb3`
 
 Updates the global InfluxDB connection settings dynamically.
 
 ```python
-slicks.configure(url=None, token=None, org=None, db=None)
+slicks.connect_influxdb3(url=None, token=None, org=None, db=None)
 ```
 - **url** *(str)*: The InfluxDB host URL (e.g., `"http://localhost:8086"`).
 - **token** *(str)*: Authentication token.

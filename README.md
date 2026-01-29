@@ -25,14 +25,14 @@ pip install slicks
 ## Quick Example
 
 ```python
-import slicks as wfr
+import slicks
 from datetime import datetime
 
 # 1. Connect (Auto-configured or custom)
-wfr.configure(db="WFR25")
+slicks.connect_influxdb3(db="WFR25")
 
 # 2. Fetch Data (One-liner)
-df = wfr.fetch_telemetry(
+df = slicks.fetch_telemetry(
     datetime(2025, 9, 28), 
     datetime(2025, 9, 30), 
     "INV_Motor_Speed"

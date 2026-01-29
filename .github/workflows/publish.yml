@@ -4,10 +4,18 @@ on:
   release:
     types: [published]
 
+permissions:
+  id-token: write  # Required for trusted publishing
+  contents: read
+
 jobs:
   pypi-publish:
     name: Upload release to PyPI
     runs-on: ubuntu-latest
+    environment: pypi  # Optional but recommended for extra security
+    permissions:
+      id-token: write
+      contents: read
     steps:
     - uses: actions/checkout@v3
     
@@ -26,5 +34,4 @@ jobs:
       
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        password: ${{ secrets.PYPI_API_TOKEN }}
+      # No credentials needed - uses OIDC trusted publishing

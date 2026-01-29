@@ -1,4 +1,4 @@
-import slicks as wfr
+import slicks
 import matplotlib.pyplot as plt
 from datetime import datetime
 import pandas as pd
@@ -14,7 +14,7 @@ def main():
     # Configure connection. 
     # For CI, these are pulled from environment variables (GitHub Secrets).
     # For local use, you can set these in a .env file or call configure() directly.
-    wfr.configure(
+    slicks.connect_influxdb3(
         url=os.getenv("INFLUX_URL"),
         token=os.getenv("INFLUX_TOKEN"),
         org=os.getenv("INFLUX_ORG"),
@@ -30,7 +30,7 @@ def main():
 
     print(f"Scanning for sensors between {start_time} and {end_time}...")
     # discover_sensors might print to stdout, which is fine
-    available = wfr.discover_sensors(start_time, end_time)
+    available = slicks.discover_sensors(start_time, end_time)
     
     # ---------------------------------------------------------
     # 3. Fetch Data
@@ -39,7 +39,7 @@ def main():
     print(f"Fetching data for: {target_signals}...")
 
     # Fetch 1-second resampled data
-    df = wfr.fetch_telemetry(start_time, end_time, signals=target_signals, filter_movement=False)
+    df = slicks.fetch_telemetry(start_time, end_time, signals=target_signals, filter_movement=False)
 
     if df is None or df.empty:
         print("No data found! CI test might fail if this persists.")

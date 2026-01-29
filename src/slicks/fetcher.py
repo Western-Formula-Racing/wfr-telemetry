@@ -24,7 +24,7 @@ def list_target_sensors():
     """
     return config.SIGNALS
 
-def fetch_telemetry(start_time, end_time, signals=None, client=None, filter_movement=True):
+def fetch_telemetry(start_time, end_time, signals=None, client=None, filter_movement=True, resample="1s"):
     """
     Fetch telemetry data for specified signals within a time range.
     
@@ -35,6 +35,8 @@ def fetch_telemetry(start_time, end_time, signals=None, client=None, filter_move
                                          Defaults to config.SIGNALS if None.
         client (InfluxDBClient3, optional): Existing client instance.
         filter_movement (bool): If True, applies movement detection filtering. Defaults to True.
+        resample (str or None): Pandas frequency string for resampling (e.g. "1s", "100ms", "5s").
+                                Set to None to disable resampling and get raw data. Defaults to "1s".
     """
     if signals is None:
         signals = config.SIGNALS
@@ -80,8 +82,9 @@ def fetch_telemetry(start_time, end_time, signals=None, client=None, filter_move
             aggfunc='mean'
         )
         
-        # Resample to common frequency
-        df = df.resample("1s").mean().dropna()
+        # Resample to common frequency (if specified)
+        if resample:
+            df = df.resample(resample).mean().dropna()
         
         # Use the movement detector tool to filter
         if filter_movement:
