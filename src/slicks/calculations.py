@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def calculate_g_sum(df: pd.DataFrame, x_col: str = "Accel_X", y_col: str = "Accel_Y", lsb_per_g: float = 81.92) -> pd.Series:
+def calculate_g_sum(df: pd.DataFrame, x_col: str = "Accel_X", y_col: str = "Accel_Y", lsb_per_g: float = 16384.0) -> pd.Series:
     """
     Calculates the combined G-force (friction circle usage).
     
@@ -9,9 +9,8 @@ def calculate_g_sum(df: pd.DataFrame, x_col: str = "Accel_X", y_col: str = "Acce
         df: DataFrame containing accelerometer data.
         x_col: Name of the longitudinal acceleration column.
         y_col: Name of the lateral acceleration column.
-        lsb_per_g: Scaling factor. Default is 81.92.
-                   Derivation: 8192 LSB/g (from +/-4G range) * 0.01 (DBC scaling factor) = 81.92.
-                   If your data is pure LSBs without DBC scaling, use 8192.0.
+        lsb_per_g: Scaling factor. Default is 16384.0 (Datasheet standard).
+                   (Derived from +/- 2G range on 16-bit sensor).
         
     Returns:
         Series representing the vector sum of G-forces.
@@ -27,16 +26,14 @@ def calculate_g_sum(df: pd.DataFrame, x_col: str = "Accel_X", y_col: str = "Acce
     g_sum = np.sqrt(x_g**2 + y_g**2)
     return g_sum
 
-def estimate_speed_from_rpm(df: pd.DataFrame, tire_radius_m: float, gear_ratio: float = 1.0, rpm_col: str = "Right_RPM") -> pd.Series:
+def estimate_speed_from_rpm(df: pd.DataFrame, tire_radius_m: float = 0.259, gear_ratio: float = 4.53, rpm_col: str = "Right_RPM") -> pd.Series:
     """
     Estimates vehicle speed from RPM data.
     
     Args:
         df: DataFrame containing RPM data.
-        tire_radius_m: Radius of the tire in meters.
-        gear_ratio: Final Drive Ratio (Motor RPM -> Wheel RPM).
-                    Use 1.0 if input is already Wheel RPM.
-                    Example: 3.5 means Motor spins 3.5x faster than wheels.
+        tire_radius_m: Radius of the tire in meters. Default 0.259 (10.2").
+        gear_ratio: Final Drive Ratio (Motor RPM -> Wheel RPM). Default 4.53.
         rpm_col: Column name for RPM. Looks for 'INV_Motor_Speed' if 'Right_RPM' missing.
         
     Returns:
