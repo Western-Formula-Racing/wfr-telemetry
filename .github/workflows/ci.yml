@@ -8,31 +8,41 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-pipeline:
+  test-and-coverage:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Python 3.11
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: "3.11"
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -e .
-        # Install pytest if we want to use it, but we are using unittest directly
-        
-    - name: Run Integration Test
+        pip install -e ".[dev]"
+
+    - name: Check docstring coverage
+      run: |
+        interrogate src/slicks -v
+
+    - name: Run tests with coverage
       env:
         INFLUX_URL: ${{ secrets.INFLUX_URL }}
         INFLUX_TOKEN: ${{ secrets.INFLUX_TOKEN }}
         INFLUX_ORG: ${{ secrets.INFLUX_ORG }}
         INFLUX_DB: ${{ secrets.INFLUX_DB }}
       run: |
-        python -m unittest discover tests
+        pytest
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        files: ./coverage.xml
+        fail_ci_if_error: false
+        verbose: true
 
     - name: Verify Documentation Example
       env:

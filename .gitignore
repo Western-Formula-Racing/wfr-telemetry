@@ -9,3 +9,9 @@ sensor_validation/
 *.egg-info/
 dist/
 build/
+
+# Coverage artifacts
+.coverage
+coverage.xml
+htmlcov/
+/examples/__pycache__

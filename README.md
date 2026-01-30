@@ -1,5 +1,9 @@
 # Slicks
 
+[![CI](https://github.com/Western-Formula-Racing/wfr-telemetry/actions/workflows/ci.yml/badge.svg)](https://github.com/Western-Formula-Racing/wfr-telemetry/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/Western-Formula-Racing/wfr-telemetry/branch/main/graph/badge.svg)](https://codecov.io/gh/Western-Formula-Racing/wfr-telemetry)
+[![interrogate](https://raw.githubusercontent.com/Western-Formula-Racing/wfr-telemetry/main/interrogate_badge.svg)](https://interrogate.readthedocs.io/)
+
 The home baked data pipeline for **Western Formula Racing**.
 
 This package handles:

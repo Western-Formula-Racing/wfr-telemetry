@@ -24,7 +24,36 @@ dependencies = [
     "tqdm>=4.0.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "interrogate>=1.5.0",
+]
+
 [project.urls]
 "Homepage" = "https://github.com/Western-Formula-Racing/wfr-telemetry"
 "Documentation" = "https://western-formula-racing.github.io/wfr-telemetry/"
 "Bug Tracker" = "https://github.com/Western-Formula-Racing/wfr-telemetry/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=slicks --cov-report=xml --cov-report=html --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["src/slicks"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = ["pragma: no cover", "if __name__ == .__main__.:"]
+fail_under = 20
+
+[tool.interrogate]
+ignore-init-method = true
+ignore-init-module = true
+fail-under = 70
+exclude = ["tests", "setup.py"]
+verbose = 1
+color = true
+generate-badge = "."
+badge-format = "svg"
